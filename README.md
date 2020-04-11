@@ -1,26 +1,24 @@
 docker-ubuntu-xfce-vnc-desktop
 =========================
 
-### From Docker Repository
+### Build
 
-``
-$ docker pull welkineins/ubuntu-xfce-vnc-desktop
-``
-
-### Build yourself
-
-``
-$ git clone https://github.com/welkineins/docker-ubuntu-xfce-vnc-desktop.git
-$ docker build --rm -t welkineins/ubuntu-xfce-vnc-desktop docker-ubuntu-xfce-vnc-desktop
-``
+```bash
+$ git clone https://github.com/zteeed/docker-ubuntu-xfce-vnc-desktop.git
+$ docker build -t zteeed/ubuntu-xfce-vnc-desktop docker-ubuntu-xfce-vnc-desktop
+```
 
 ### Run
 
-``
-$ docker run -i -t -p 5900:5900 welkineins/ubuntu-xfce-vnc-desktop
-``
+```bash
+$ docker run -d -p 5900-5901:5900-5901 -p 6900-6901:6900-6901 --name ubuntu-xfce-vnc-desktop zteeed/ubuntu-xfce-vnc-desktop
+```
 
-Use vnc viewer to <YOUR IP>:5900
+Use:
+- vnc viewonly viewer to `<YOUR IP>:5900`
+- vnc viewer to `<YOUR IP>:5901`
+- novnc viewonly viewer to `http://<YOUR IP>:6900`
+- novnc viewer to `http://<YOUR IP>:6901`
 
 
 Trobleshooting
