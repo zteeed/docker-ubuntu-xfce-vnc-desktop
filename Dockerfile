@@ -1,25 +1,24 @@
-FROM ubuntu:14.04
-MAINTAINER Chieh Yu <welkineins@gmail.com>
+FROM ubuntu:18.04
+
+MAINTAINER Aurelien Duboc "aurelien@duboc.xyz"
 
 ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
+ENV DISPLAY=:1
 
-RUN apt-get update \
-	&& apt-get install -y supervisor \
-		openssh-server vim-tiny \
-		xfce4 xfce4-goodies \
-		x11vnc xvfb \
-		firefox \
-	&& apt-get autoclean \
-	&& apt-get autoremove \
-	&& rm -rf /var/lib/apt/lists/*
+# Install common tools
+COPY src/tools.sh /root/tools.sh
+RUN /root/tools.sh
 
-WORKDIR /root
+# Install noVNC
+COPY src/novnc_install.sh /root/novnc_install.sh
+RUN /root/novnc_install.sh
 
-ADD startup.sh ./
-ADD supervisord.conf ./
+# Use custom xfce config
+COPY src/xfce-config /root/.config
 
-EXPOSE 5900
-EXPOSE 22
+COPY src/novnc_startup.sh /root/novnc_startup.sh
+COPY src/game_startup.sh /root/game_startup.sh
 
-ENTRYPOINT ["./startup.sh"]
+COPY supervisord.conf /etc/supervisord.conf
+ENTRYPOINT ["/usr/bin/supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
