@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Manage VNC passwords
+mkdir -p /root/.vnc
+x11vnc -storepasswd "$USER_PASSWORD" /root/.vnc/user_password
+x11vnc -storepasswd "$ADMIN_PASSWORD" /root/.vnc/admin_password
+
 /usr/bin/firefox --display :1 --kiosk --private-window $GAME_URL & 
 # Fullscreen
 xdotool search --sync --onlyvisible --class "Firefox" windowactivate key F11

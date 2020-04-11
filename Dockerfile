@@ -18,13 +18,6 @@ RUN /root/novnc_install.sh
 # Use custom xfce config
 COPY src/xfce-config /root/.config
 
-# Manage VNC passwords
-ENV USER_PASSWORD user_password
-ENV ADMIN_PASSWORD admin_password
-RUN mkdir -p /root/.vnc && \
-    x11vnc -storepasswd $USER_PASSWORD /root/.vnc/user_password && \
-    x11vnc -storepasswd $ADMIN_PASSWORD /root/.vnc/admin_password
-
 COPY src/novnc_startup.sh /root/novnc_startup.sh
 COPY src/game_startup.sh /root/game_startup.sh
 

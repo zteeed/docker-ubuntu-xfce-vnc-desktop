@@ -14,12 +14,20 @@ $ docker build -t zteeed/ubuntu-xfce-vnc-desktop docker-ubuntu-xfce-vnc-desktop
 $ docker run -d -p 5900-5901:5900-5901 -p 6900-6901:6900-6901 --name ubuntu-xfce-vnc-desktop zteeed/ubuntu-xfce-vnc-desktop
 ```
 
+By default there is no password for the viewonly and non-viewonly access (VNC/noVNC).
 Use:
 - vnc viewonly viewer to `<YOUR IP>:5900`
 - vnc viewer to `<YOUR IP>:5901`
-- novnc viewonly viewer to `http://<YOUR IP>:6900`
-- novnc viewer to `http://<YOUR IP>:6901`
+- novnc viewonly viewer to `http://<YOUR IP>:6900?password=%00`
+- novnc viewer to `http://<YOUR IP>:6901?password=%00`
 
+You can set custom passwords and game\_url using environment vars:
+- `USER_PASSWORD` is for viewonly VNC/noVNC access (port 5900/6900)
+- `ADMIN_PASSWORD` is for non-viewonly VNC/noVNC access (port 5901/6901)
+
+```bash
+$ docker run -d -e USER_PASSWORD="user_password" -e ADMIN_PASSWORD="admin_password" -e GAME_URL="https://gameon.world" -p 5900-5901:5900-5901 -p 6900-6901:6900-6901 --name ubuntu-xfce-vnc-desktop zteeed/ubuntu-xfce-vnc-desktop
+```
 
 ### SSL
 
