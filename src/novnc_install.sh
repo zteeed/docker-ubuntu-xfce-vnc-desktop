@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NO_VNC_HOME="$HOME/noVNC"
+NO_VNC_HOME="/root/noVNC"
 
 echo "Install noVNC - HTML5 based VNC viewer"
 mkdir -p $NO_VNC_HOME/utils/websockify
