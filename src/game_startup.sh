@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Disable screensaver and power management
+xset -dpms &
+xset s noblank &
+xset s off &
+
 # Manage VNC passwords
 mkdir -p /root/.vnc
 x11vnc -storepasswd "$USER_PASSWORD" /root/.vnc/user_password
