@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 MAINTAINER Aurelien Duboc "aurelien@duboc.xyz"
 
 ENV HOME /root
+ENV TERM xterm
 ENV DEBIAN_FRONTEND noninteractive
 ENV DISPLAY=:1
 
